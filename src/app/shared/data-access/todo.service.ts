@@ -1,15 +1,17 @@
-import { Injectable, signal } from "@angular/core";
-import { Todo } from "../interfaces/todo";
+import { Injectable, signal } from '@angular/core';
+import { CreateTodo, Todo } from '../interfaces/todo';
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
-
 export class TodoService {
-    #todos = signal<Todo[]>([]);
-    todos = this.#todos.asReadonly();
+  #todos = signal<Todo[]>([]);
+  todos = this.#todos.asReadonly();
 
-    addTodo(todo: Todo) {
-        this.#todos.update((todos) => [...todos, todo]);
-    }
+  addTodo(todo: CreateTodo) {
+    this.#todos.update((todos) => [
+      ...todos,
+      { ...todo, id: Date.now().toString() },
+    ]);
+  }
 }

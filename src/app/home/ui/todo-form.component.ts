@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Todo } from '../../shared/interfaces/todo';
+import { CreateTodo, Todo } from '../../shared/interfaces/todo';
 
 @Component({
   standalone: true,
@@ -23,7 +23,7 @@ import { Todo } from '../../shared/interfaces/todo';
 })
 export class TodoFormComponent {
   private fb = inject(FormBuilder);
-  @Output() todoSubmitted = new EventEmitter<Todo>();
+  @Output() todoSubmitted = new EventEmitter<CreateTodo>();
 
   todoForm = this.fb.nonNullable.group({
     title: ['', Validators.required],
